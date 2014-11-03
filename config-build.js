@@ -4,5 +4,5 @@
         React: '../lib/react-0.11.2.min'
     },
     name: "boot",
-    out: "app.js"
+    out: "src/app.js"
 })

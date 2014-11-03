@@ -1,5 +1,3 @@
-@media only screen and (min-width:240px) {body {margin-left:0.7em;}}
-@media only screen and (min-width:400px) {body {width:38.2%;margin:0 auto;}}
 body {font-family:averia-libre, sans-serif;color:#111;}
 h2 {font-family:Helvetica, sans-serif;}
 ul#song-list {font-size:16px;list-style-type:none;margin:0 0 2em 0;padding:0;}
