@@ -1,10 +1,6 @@
-body {font-family:averia-libre, sans-serif;color:#111;}
-h2 {font-family:Helvetica, sans-serif;}
-ul#song-list {font-size:16px;list-style-type:none;margin:0 0 2em 0;padding:0;}
-#sig {font-size:x-small;font-family:"Lucida Sans Typewriter", "Lucida Console", Monaco, "Bitstream Vera Sans Mono", monospace;}
-.message {margin-left:21px;margin-bottom:10px;font-family:Helvetica, sans-serif;font-weight:200;}
-.marker {margin-right:6px;}
+body{font-family:averia-libre, sans-serif;color:#111;}
+h2{font-family:Helvetica, sans-serif;}
+ul#playlist{font-size:16px;list-style-type:none;margin:0 0 2em 0;padding:0;}
+#sig{font-size:x-small;font-family:"Lucida Sans Typewriter", "Lucida Console", Monaco, "Bitstream Vera Sans Mono", monospace;}
 .now-playing {border-left:3px solid limegreen;margin-right:3px;}
 .paused {border-left:3px solid orange;margin-right:3px;}
-.hidden {display:none;}
-.transparent {color:transparent;}

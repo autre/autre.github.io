@@ -7,7 +7,6 @@ define([], function() {
         return new Promise(function(resolve, reject) {
             var req = new XMLHttpRequest();
 
-            reject = reject || function() {};
             req.open(method, url, true);
 
             if (options.headers) {
@@ -21,13 +20,7 @@ define([], function() {
             }, false);
 
             req.addEventListener('load', function(e) {
-                var st = e.target.status;
-
-                if (st === 0 || st >= 400) {
-                    reject(e);
-                } else {
-                    resolve(e.target.responseText);
-                }
+                resolve([e.target.responseText, e.target.status]);
             }, false);
 
             req.send(options.data || void 0);
@@ -38,7 +31,7 @@ define([], function() {
 
     ['HEAD', 'GET', 'PUT', 'POST', 'DELETE', 'PATCH', 'OPTIONS'].forEach(function(method) {
         o[method.toLowerCase()] = function(url, options) {
-            return xhr(method, url, options);
+            return xhr(method, url, options || {});
         };
     });
 

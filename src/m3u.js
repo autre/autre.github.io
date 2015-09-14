@@ -3,7 +3,7 @@
 define([], function() {
     'use strict';
 
-    return function toList(text) {
+    return function to_list(text) {
         var lines = String(text).split(/[\r\n]/),
             list = [],
             i,
