@@ -11,7 +11,7 @@ requirejs(['xhr', 'm3u', 'player', 'React', 'views'], function(xhr, m3u, Player,
     'use strict';
 
     xhr.get('/εκλόγιμον/songs.m3u')
-        .then(function(text) { return m3u(text); })
+        .then(function(resp, status) { return m3u(resp); })
         .then(function(playlist) {
             var app = new Player(playlist);
             var appView = React.createElement(views.PlayerView, { app: app });

@@ -15,14 +15,10 @@ define([], function() {
                 });
             }
 
-            req.addEventListener('error', function(e) {
-                reject(e);
-            }, false);
-
+            req.addEventListener('error', function(e) { reject(e); }, false);
             req.addEventListener('load', function(e) {
-                resolve([e.target.responseText, e.target.status]);
+                resolve(e.target.responseText, e.target.status);
             }, false);
-
             req.send(options.data || void 0);
         });
     }
