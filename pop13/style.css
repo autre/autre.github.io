@@ -1,0 +1,40 @@
+
+#list-title {
+    width: 90%;
+    padding-bottom: 10px;
+    font-family: 'Neue Helvetica', HelveticaNeue, 'Droid Sans';
+    font-style: oblique;
+}
+
+#song-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    width: 90%;
+    font-family: 'Didact Gothic', Helvetica, HelveticaNeue, 'sans serif';
+}
+
+.box {
+    margin: 3px;
+    padding: 5px;
+    /* border: 1px solid black; */
+}
+
+.hidden {
+    display: none;
+}
+
+.playing {
+    border-left: 3px solid limegreen;
+}
+
+#notice {
+    background-color: #EE6363;
+    width: 25%;
+}
+
+#sig {
+    font-size: x-small;
+    font-family: 'Neue Helvetica', HelveticaNeue, 'Droid Sans', 'sans serif';
+}
+
