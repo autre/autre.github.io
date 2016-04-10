@@ -17,27 +17,53 @@ define(['React'], function(React) {
     var Playlist = create({
         displayName: 'PlaylistView',
         on_song_click: function(idx) {
-            var app = this.props.app;
+            var self = this;
 
             return function(evt) {
-                console.log('clicked', idx);
-                app.selected_song(idx);
+                self.props.on_song_click(idx);
             };
         },
         render: function() {
             var self = this;
-            var songs = this.props.app.get_playlist()
+            var songs = this.props.playlist
                 .map(function(name) { return elem(Song, { name: name }); })
-                .map(function(s, idx) { return dom.li({ key: idx, onClick: self.on_song_click(idx) }, s); });
+                .map(function(s, idx) {
+                    var currently_selected = idx === self.props.current;
+                    var is_playing = self.props.is_playing;
 
-            return dom.ul(null, songs);
+                    if (!currently_selected) {
+                        return dom.li({ key: idx, onClick: self.on_song_click(idx) }, s);
+                    }
+
+                    return dom.li({ className: is_playing ? 'now-playing' : 'paused', key: idx, onClick: self.on_song_click(idx) }, s);
+                });
+
+            return dom.ul({ id: 'playlist' }, songs);
         }
     });
 
     var PlayerView = create({
         displayName: 'PlayerView',
+        getInitialState: function() {
+            var app = this.props.app;
+
+            return { current: app.current, is_playing: app.is_playing };
+        },
+        on_song_click: function(idx) {
+            var app = this.props.app;
+
+            app.selected_song(idx);
+            this.setState({ current: app.current, is_playing: app.is_playing });
+        },
         render: function() {
-            return elem(Playlist, { app: this.props.app });
+            var app = this.props.app;
+
+            return elem(Playlist, {
+                playlist: app.get_playlist(),
+                current: this.state.current,
+                is_playing: this.state.is_playing,
+                on_song_click: this.on_song_click
+            });
         }
     });
 

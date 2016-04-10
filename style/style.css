@@ -1,6 +1,33 @@
-body{font-family:averia-libre, sans-serif;color:#111;}
-h2{font-family:Helvetica, sans-serif;}
-ul#playlist{font-size:16px;list-style-type:none;margin:0 0 2em 0;padding:0;}
-#sig{font-size:x-small;font-family:"Lucida Sans Typewriter", "Lucida Console", Monaco, "Bitstream Vera Sans Mono", monospace;}
-.now-playing {border-left:3px solid limegreen;margin-right:3px;}
-.paused {border-left:3px solid orange;margin-right:3px;}
+body {
+    color: #111;
+    margin-left: 4px;
+    line-height: 1.7em;
+}
+
+h2 {
+    font-family: Helvetica, sans-serif;
+    font-style: oblique;
+}
+
+ul#playlist {
+    list-style-type: none;
+    margin: 0 0 3em 0;
+    padding: 0 1em;
+    font-family: 'Didact Gothic', Helvetica, HelveticaNeue, 'sans serif';
+    font-size: 1em;
+}
+
+#sig {
+    font-size: x-small;
+    font-family: "Lucida Sans Typewriter", "Lucida Console", Monaco, "Bitstream Vera Sans Mono", monospace;
+}
+
+.now-playing {
+    border-left: 3px solid limegreen;
+    padding-left:5px;
+}
+
+.paused {
+    border-left: 3px solid orange;
+    padding-left:5px;
+}

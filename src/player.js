@@ -15,8 +15,6 @@ define([], function() {
     };
 
     AudioPlayer.prototype.selected_song = function(idx) {
-        console.log('playing?', this.is_playing, 'current', this.current, 'next', idx);
-
         if (idx === this.current) {
             if (this.is_playing) {
                 this.pause();
