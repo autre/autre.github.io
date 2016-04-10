@@ -4,11 +4,32 @@ define([], function() {
     'use strict';
 
     function AudioPlayer(playlist) {
-        this.audio_player = this.make_dom_player();
         this.playlist = playlist;
+        this.audio_player = this.make_dom_player();
         this.is_playing = false;
-        this.playing_index = -1;
+        this.current = -1;
     }
+
+    AudioPlayer.prototype.get_playlist = function() {
+        return this.playlist.map(function(s) { return s.name; });
+    };
+
+    AudioPlayer.prototype.selected_song = function(idx) {
+        console.log('playing?', this.is_playing, 'current', this.current, 'next', idx);
+
+        if (idx === this.current) {
+            if (this.is_playing) {
+                this.pause();
+            } else {
+                this.play();
+            }
+
+            return;
+        }
+
+        this.load(idx);
+        this.play();
+    };
 
     AudioPlayer.prototype.make_dom_player = function() {
         var audio = document.createElement('audio');
@@ -27,7 +48,8 @@ define([], function() {
 
     AudioPlayer.prototype.on_error = function(e) {
         console.error(e);
-        throw e;
+        console.info('unable to load song:', this.playlist[this.current]);
+        this.play_next();
     };
 
     AudioPlayer.prototype.on_ended = function(e) {
@@ -35,11 +57,14 @@ define([], function() {
     };
 
     AudioPlayer.prototype.play_next = function() {
-        this.load_next() && this.audio_player.play();
+        if (this.load_next()) {
+            this.play();
+        }
     };
 
     AudioPlayer.prototype.load = function(idx) {
         this.audio_player.src = this.playlist[idx].url;
+        this.current = idx;
     };
 
     AudioPlayer.prototype.play = function() {
@@ -53,39 +78,14 @@ define([], function() {
     };
 
     AudioPlayer.prototype.load_next = function() {
-        if (this.playing_index < this.playlist.length) {
-            this.playing_index += 1;
-            this.load(this.playing_index);
+        if (this.current < this.playlist.length) {
+            this.current += 1;
+            this.load(this.current);
 
             return true;
         }
 
         return false;
-    };
-
-    AudioPlayer.prototype.get_songs = function() {
-        return this.playlist.map(function(s) { return s.name; });
-    };
-
-    AudioPlayer.prototype.has_selected_song = function(idx) {
-        if (this.is_playing) {
-            if (this.playing_index === idx) {
-                this.pause();
-            } else {
-                this.load(idx);
-                this.play();
-            }
-        } else {
-            if (this.playing_index !== idx) {
-                this.load(idx);
-            }
-
-            this.play();
-        }
-    };
-
-    AudioPlayer.prototype.toString = function() {
-        return "#<AudioPlayer>";
     };
 
     return AudioPlayer;

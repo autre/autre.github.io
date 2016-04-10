@@ -7,19 +7,17 @@ requirejs.config({
     },
 });
 
-requirejs(['xhr', 'm3u', 'player', 'React', 'views', 'logging-proxy'], function(xhr, m3u, Player, React, views, logging) {
+requirejs(['xhr', 'm3u', 'player', 'React', 'views'], function(xhr, m3u, Player, React, views) {
     'use strict';
-
-    var devel = true;
 
     xhr.get('songs.m3u')
         .then(function(resp, status) { return m3u(resp); })
         .then(function(playlist) {
-            var app = new Player(playlist);
-            var proxy = devel ? logging(app) : app;
-            var appView = React.createElement(views.PlayerView, { app: proxy });
+            var player = new Player(playlist);
+            var appView = React.createElement(views.PlayerView, { app: player });
 
             React.render(appView, document.getElementsByTagName('main')[0]);
+            player.play_next();
         }).catch(function(err) {
             console.error(err);
             throw err;
